@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>递归斐波那契数列</title>
+  </head>
+  <body>
+    <script>
+      let cache = {};
+      function fibber(n) {
+        if (cache.hasOwnProperty(n)) {
+          return cache[n];
+        }
+        if (n === 0 || n === 1) {
+          return 1;
+        } else {
+          const val = fibber(n - 1) + fibber(n - 2);
+          cache[n] = val;
+          return val;
+        }
+      }
+      console.log(fibber(5));
+    </script>
+  </body>
+</html>

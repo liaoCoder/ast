@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>寻找重复次数最多的字符</title>
+  </head>
+  <body>
+    <script>
+      var str = "aaaabbbbbbbbccccddddddddddddddddd";
+      function findRepeatMore(str) {
+        let i = 0,
+          j = 0,
+          max = 0;
+        //i指针会不断后移，直到最后一个
+        while (i <= str.length) {
+          //如果两个数字不相同
+          if (str[i] !== str[j]) {
+            //获取j-i，就是重复次数
+            const repeatNum = i - j;
+            //如果重复次数大于max，
+            if (repeatNum > max) {
+              max = repeatNum;
+              console.log(max);
+            }
+            j = i;
+          }
+          i++;
+        }
+        return max;
+      }
+      console.log(findRepeatMore(str));
+    </script>
+  </body>
+</html>
