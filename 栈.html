@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>栈</title>
+  </head>
+  <body>
+    <script>
+      let str = "2[1[a]2[b]]";
+      function smartRepeat(str) {
+        let index = 0,
+          zhan1 = [],
+          zhan2 = [""];
+        while (index < str.length) {
+          /*
+            如果是数字的话那就把数字压到栈1
+            如果是 [ 的话那就把空字符串压到栈2
+            如果是字母的话那就把栈2的栈顶的字符串改成字母
+            如果是 ] 的话那就栈1的栈顶出栈，并且栈2的顶栈的元素重复栈1的栈顶次数，并且重新拼接到新栈顶上
+          */
+          let cur = str[index];
+          if (cur.match(/[1-9]/)) {
+            zhan1.push(cur);
+          } else if (cur === "[") {
+            zhan2.push("");
+          } else if (cur.match(/[a-z]/)) {
+            zhan2[zhan2.length - 1] = cur;
+          } else if (cur === "]") {
+            const times = zhan1.pop();
+            const letters = zhan2[zhan2.length - 1];
+            const repeatStr = letters.repeat(times);
+            if (zhan2.length > 1) {
+              zhan2.pop();
+            }
+            zhan2[zhan2.length - 1] += repeatStr;
+          }
+          index++;
+        }
+        return zhan2;
+      }
+      console.log(smartRepeat(str));
+    </script>
+  </body>
+</html>
